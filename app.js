@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const passportJWT = require('passport-jwt');
+const cors = require('cors'); 
 
 const app = express();
 
