@@ -6,6 +6,8 @@ const passportJWT = require('passport-jwt');
 
 const app = express();
 
+app.use(cors());
+
 // Connect to your MongoDB database
 mongoose.connect('mongodb+srv://kishen:12345@customermanage.utv508z.mongodb.net/?retryWrites=true&w=majority', {
   useNewUrlParser: true,
