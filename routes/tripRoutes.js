@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Trip = require('../models/Trip');
-const QRCode = require('qrcode');
 const fs = require('fs');
 
 
