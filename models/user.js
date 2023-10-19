@@ -11,6 +11,7 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  credits: Number
 });
 
 module.exports = mongoose.model('User', UserSchema);
