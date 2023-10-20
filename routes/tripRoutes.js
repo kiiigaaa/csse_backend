@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Trip = require('../models/Trip');
+const User = require('../models/user'); // Adjust the path as needed to correctly import the User model
+
+
 const fs = require('fs');
 
 
@@ -92,6 +95,47 @@ router.get('/end-points', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch end points' });
   }
 });
+
+router.get('/user/credits/:userId', (req, res) => {
+  const userId = req.params.userId;
+
+  // Find the user by ID and retrieve their credits
+  User.findById(userId)
+    .then((user) => {
+      if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+
+      res.json({ credits: user.credits });
+    })
+    .catch((error) => {
+      res.status(500).json({ error: 'Failed to fetch user credits', details: error });
+    });
+});
+
+// Add this route to your backend
+router.put('/user/credits/:userId', (req, res) => {
+  const userId = req.params.userId;
+  const { credits } = req.body; // Credits to be updated
+
+  // Find the user by ID and update their credits
+  User.findByIdAndUpdate(
+    userId,
+    { credits: credits },
+    { new: true } // To return the updated user object
+  )
+    .then((user) => {
+      if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+
+      res.json({ credits: user.credits });
+    })
+    .catch((error) => {
+      res.status(500).json({ error: 'Failed to update user credits', details: error });
+    });
+});
+
 
 
 module.exports = router;
