@@ -6,7 +6,7 @@ const User = require('../models/user');
 
 // Register a new user
 router.post('/register', (req, res) => {
-    const { username, password } = req.body;
+    const { username, password,credits } = req.body;
   
     // Check if the username already exists
     User.findOne({ username }).then((user) => {
@@ -17,6 +17,7 @@ router.post('/register', (req, res) => {
       const newUser = new User({
         username,
         password,
+        credits
       });
   
       // Hash the password (you should use bcrypt for a secure hash)
