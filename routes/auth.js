@@ -42,9 +42,9 @@ router.post('/register', (req, res) => {
   
       // Check the password (you should use bcrypt for secure password comparison)
       if (password === user.password) {
-        const payload = { userId: user.id , username: user.username };
+        const payload = { id: user.id, username: user.username };
         const token = jwt.sign(payload, 'your-secret-key');
-        res.json({ success: true, token: `Bearer ${token}` });
+        res.json({ success: true, token: `Bearer ${token}`,userId: user.id });
       } else {
         res.status(400).json({ error: 'Password is incorrect' });
       }
